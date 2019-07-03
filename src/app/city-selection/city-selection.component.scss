@@ -1,0 +1,77 @@
+$light-gray: rgb(161, 161, 161);
+$medium-gray: rgb(91, 100, 107);
+
+$medium-blue-gray: rgb(76, 104, 128);
+$dark-blue-gray: rgb(55, 68, 78);
+
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.city-selection {
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+}
+
+p {
+  text-align: center;
+  color: $medium-gray;
+  &.current-position {
+    font-size: 1.2rem;
+    & .link {
+      border-bottom: 1px dashed $medium-gray;
+      display: inline-block;
+      cursor: pointer;
+    }
+  }
+}
+
+.input-field {
+  margin: 0 auto;
+  width: 55%;
+  position: relative;
+  & i {
+    font-size: 2.2rem;
+    color: $medium-blue-gray;
+    top: .3rem;
+    right: 0;
+    position: absolute;
+    transition: color .2s;
+    cursor: pointer;
+
+    &:hover {
+      color: $dark-blue-gray;
+    }
+  }
+}
+
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid $medium-blue-gray;
+  padding-right: 2.3rem;
+  padding-left: 2.3rem;
+  width: 100%;
+
+  font-size: 2.2rem;
+  font-weight: 500;
+  text-align: center;
+  color: $medium-blue-gray;
+  outline: none;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $light-gray;
+  }
+}
+
+a {
+  transition: color .2s;
+  &:hover {
+    color: $dark-blue-gray;
+  }
+}
