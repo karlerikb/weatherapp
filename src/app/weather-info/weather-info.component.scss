@@ -1,0 +1,49 @@
+@import "../../sass/variables.scss";
+
+.container * {
+  box-sizing: border-box;
+  color: $medium-blue-gray;
+}
+
+.controls {
+  // background: lightgreen;
+  flex-wrap: nowrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 1vw 0;
+  font-weight: 500;
+  font-size: 2.3rem;
+  cursor: pointer;
+
+  & .icon {
+    padding-right: 1.5vw;
+    display: inline-block;
+    vertical-align: middle;
+    & i {
+      font-size: 2rem;
+    }
+  }
+}
+
+
+
+
+
+// .checkbox {
+//   font-weight: 500;
+//   font-size: 2.3rem;
+//   width: 20%;
+//   position: relative;
+// }
+
+// .checkbox .field {
+//   // background: lightyellow;
+//   position: absolute;
+//   top: 25%;
+//   right: 0;
+//   font-size: 1rem;
+// }

@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/weathericons/sass/weather-icons.min.scss",
               "src/styles.scss"
             ],
             "scripts": []

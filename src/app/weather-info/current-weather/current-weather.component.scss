@@ -1,0 +1,42 @@
+@import "../../../sass/variables.scss";
+
+p {
+  margin: 1rem 0;
+  font-weight: 300;
+
+  &.date {
+    font-size: 2rem;
+  }
+  &.weather-description {
+    font-size: 1.5rem;
+  }
+}
+
+.weather-info {
+  margin-bottom: 3vw;
+  & * {
+    color: $medium-red;
+  }
+  & > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  & .temp {
+    font-size: 7rem;
+  }
+  & .icon {
+    padding: 0 4.5vw;
+    font-size: 8rem;
+  }
+  & .day-temps {
+    font-size: 1.2rem;
+    font-weight: 300;
+    width: 20%;
+    & table {
+      width: 100%;
+    }
+    & tr {
+      height: 2rem;
+    }
+  }
+}
