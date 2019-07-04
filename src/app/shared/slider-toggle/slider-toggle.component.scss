@@ -1,0 +1,71 @@
+@import "../../../sass/variables.scss";
+
+.temperature-unit-toggle {
+  width: 76px;
+  height: 26px;
+  display: block;
+  position: relative;
+
+  & input[type=checkbox] {
+    visibility: hidden;
+
+    &:checked ~ .slider > .button {
+      transform: translateX(46px);
+    }
+    &:checked ~ .slider > .unit {
+      transform: translateX(-26px);
+    }
+  }
+  & label {
+    width: 76px;
+    height: 26px;
+    opacity: 0;
+    top: -20px;
+    display: block;
+    position: relative;
+  }
+  & * {
+    cursor: pointer;
+  }
+}
+
+.slider {
+  border: 1px solid $medium-blue-gray;
+  border-radius: 20px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+
+  & .button {
+    border: 1px solid $medium-blue-gray;;
+    border-radius: 20px;
+    width: 24px;
+    height: 20px;
+    background: $white;
+    box-shadow: 0 0 2px 1px $shadow-black;
+    top: 1px;
+    left: 1px;
+    position: absolute;
+    transition: all .3s ease;
+  }
+
+  & .unit {
+    width: 24px;
+    height: 20px;
+    right: 12px;
+    top: 2px;
+    position: absolute;
+    transition: all .3s ease;
+
+    & > .text {
+      font-size: .8rem;
+      font-weight: 700;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

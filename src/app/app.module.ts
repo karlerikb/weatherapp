@@ -6,6 +6,7 @@ import { CitySelectionComponent } from './city-selection/city-selection.componen
 import { WeatherInfoComponent } from './weather-info/weather-info.component';
 import { CurrentWeatherComponent } from './weather-info/current-weather/current-weather.component';
 import { TemperatureListComponent } from './weather-info/temperature-list/temperature-list.component';
+import { SliderToggleComponent } from './shared/slider-toggle/slider-toggle.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { TemperatureListComponent } from './weather-info/temperature-list/temper
     CitySelectionComponent,
     WeatherInfoComponent,
     CurrentWeatherComponent,
-    TemperatureListComponent
+    TemperatureListComponent,
+    SliderToggleComponent
   ],
   imports: [
     BrowserModule
