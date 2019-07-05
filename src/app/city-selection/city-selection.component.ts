@@ -45,6 +45,22 @@ export class CitySelectionComponent implements OnInit, OnDestroy {
     }
   }
 
+  onGetCurrentPosition() {
+    this.isLoading = true;
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.getCoords(position);
+    });
+  }
+
+  private getCoords(position) {
+    const apiConf = {
+      lat: position.coords.latitude,
+      lon: position.coords.longitude,
+      units: 'metric'
+    };
+    this.weatherService.selectLocationByCoordinates(apiConf);
+  }
+
   private formValidation(form: NgForm) {
     if (form.invalid) {
       this.cityInputField = 'invalid';
