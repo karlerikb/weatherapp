@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-temperature-list',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./temperature-list.component.scss']
 })
 export class TemperatureListComponent implements OnInit {
+
+  @Input() weatherList: any[];
 
   constructor() { }
 

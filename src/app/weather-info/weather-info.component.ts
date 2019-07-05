@@ -12,6 +12,7 @@ export class WeatherInfoComponent implements OnInit {
   city = '';
   dateTime = '';
   currentWeatherInfo: any;
+  weatherList: any[];
   private days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   private months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December'];
 
@@ -22,6 +23,7 @@ export class WeatherInfoComponent implements OnInit {
       const data = JSON.parse(localStorage.getItem('weatherapi'));
       this.displayCurrentCity(data.city.name);
       this.generateCurrentWeatherInfo(data);
+      this.generateWeatherList(data);
     } else {
       this.router.navigate(['/']);
     }
@@ -33,6 +35,54 @@ export class WeatherInfoComponent implements OnInit {
 
   private displayCurrentCity(city: string) {
     this.city = city;
+  }
+
+  private generateWeatherList(data: any) {
+    const dayOfTheWeek = new Date(data.list[0].dt_txt).getDay();
+    const hour = new Date(data.list[0].dt_txt).getHours();
+    const days = [];
+
+    for (let i = 0; i < 7; i++) {
+      let temperature; let icon;
+      const day = this.days[(dayOfTheWeek + i) % 7];
+      const timeIndex = this.getTimeIndex(i, hour);
+
+      if (timeIndex >= 0 && timeIndex < 40) {
+        temperature = this.getTemperature(data, timeIndex);
+        icon = this.getIcon(data, timeIndex);
+      } else if (timeIndex >= 40) {
+        temperature = 'N/A';
+        icon = `wi-na`;
+      } else {
+        icon = this.getIcon(data, 0);
+        temperature = this.getTemperature(data, 0);
+      }
+      days.push({ day, icon, temperature, timeIndex });
+    }
+    this.weatherList = days;
+  }
+
+  private getTemperature(data: any, timeIndex: number) {
+    return Math.round(data.list[timeIndex].main.temp);
+  }
+
+  private getIcon(data: any, timeIndex: number) {
+    return `wi-owm-${data.list[timeIndex].weather[0].id}`;
+  }
+
+  private getTimeIndex(i: number, hour: number) {
+    const hours = [0, 3, 6, 9, 12, 15, 18, 21];
+    const timeIndeces = [12, 11, 10, 9, 8, 7, 6, 5];
+    const index = hours.indexOf(hour);
+    if (i === 0) {
+      return timeIndeces[index] - 8;
+    }
+    if (i === 1) {
+      return timeIndeces[index];
+    }
+    if (i > 1) {
+      return timeIndeces[index] + (i - 1) * 8;
+    }
   }
 
   private generateCurrentWeatherInfo(data: any) {
