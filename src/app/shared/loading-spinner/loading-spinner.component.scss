@@ -1,0 +1,21 @@
+@import "../../../sass/variables.scss";
+
+.loader {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.spinner {
+  border: 3px solid $very-light-gray;
+  border-top: 3px solid $medium-blue-gray;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

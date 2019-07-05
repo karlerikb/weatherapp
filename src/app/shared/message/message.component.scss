@@ -1,0 +1,20 @@
+@import "../../../sass/variables.scss";
+
+.message {
+  position: absolute;
+  top: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  & > p {
+    padding: 1vw 2vw;
+    text-align: center;
+    color: $white;
+  }
+
+  &.error > p {
+    background: $white;
+    color: $dark-red;
+  }
+}

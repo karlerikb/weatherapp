@@ -1,10 +1,21 @@
 <div class="container">
-  <div class="city-selection">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <app-message *ngIf="displayMessage" [msg]="msgObj"></app-message>
+  <form (submit)="onSelectCity(form)" class="city-selection" #form="ngForm">
     <div class="input-field">
-      <input type="text" placeholder="City">
-      <i class="material-icons">search</i>
+      <input
+        type="text"
+        name="city"
+        placeholder="City"
+        #cityInput="ngModel"
+        ngModel
+        required
+        [ngClass]="{ invalid: cityInputField }">
+      <button type="submit">
+        <i class="material-icons">search</i>
+      </button>
     </div>
     <p class="choice-description">or</p>
     <p class="current-position">use my <span class="link"><a>current position</a></span></p>
-  </div>
+  </form>
 </div>
