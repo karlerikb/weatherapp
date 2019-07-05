@@ -33,7 +33,11 @@ p {
     font-weight: 300;
     width: 20%;
     & table {
+      border-collapse: collapse;
       width: 100%;
+      & td:nth-child(2) {
+        text-align: right;
+      }
     }
     & tr {
       height: 2rem;

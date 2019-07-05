@@ -31,7 +31,6 @@ export class WeatherService {
     return this.apiDataListener.asObservable();
   }
 
-
   private storeCityData(data: any) {
     localStorage.setItem('weatherapi', JSON.stringify(data));
   }

@@ -1,27 +1,31 @@
-<p class="date">Tuesday, December 6th, 2016</p>
-<p class="weather-description">Light snow</p>
+<p class="date">{{ weatherInfo.date }}</p>
+<p class="weather-description">{{ weatherInfo.description }}</p>
 <div class="weather-info">
-  <div class="temp">4&#176;C</div>
+  <div class="temp">{{ weatherInfo.temp }}&#176;C</div>
   <div class="icon">
-    <i class="wi wi-day-sunny"></i>
+    <i class="wi" [ngClass]="weatherInfo.icon"></i>
   </div>
   <div class="day-temps">
     <table>
       <tr>
         <td>Morning</td>
-        <td>-5&#176;C</td>
+        <td>{{ weatherInfo.fullDayTemps.morning }}</td>
+        <td>&#176;C</td>
       </tr>
       <tr>
         <td>Day</td>
-        <td>-4&#176;C</td>
+        <td>{{ weatherInfo.fullDayTemps.day }}</td>
+        <td>&#176;C</td>
       </tr>
       <tr>
         <td>Evening</td>
-        <td>-0&#176;C</td>
+        <td>{{ weatherInfo.fullDayTemps.evening }}</td>
+        <td>&#176;C</td>
       </tr>
       <tr>
         <td>Night</td>
-        <td>-2&#176;C</td>
+        <td>{{ weatherInfo.fullDayTemps.night }}</td>
+        <td>&#176;C</td>
       </tr>
     </table>
   </div>
