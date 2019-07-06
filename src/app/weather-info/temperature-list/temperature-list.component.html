@@ -4,7 +4,7 @@
     <i class="wi" [ngClass]="day.icon"></i>
     <p class="temp">
       <span>{{ day.temperature }}</span>
-      <span *ngIf="day.temperature !== 'N/A'"><span>&#176;</span>{{ 'C' }}</span>
+      <span *ngIf="day.temperature !== 'N/A'"><span>&#176;</span>{{ unit }}</span>
     </p>
   </div>
 </div>

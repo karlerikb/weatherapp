@@ -13,57 +13,97 @@ const API_URL = 'https://api.openweathermap.org/data/2.5';
 export class WeatherService {
 
   apiDataListener = new Subject<any>();
-  private unit = 'metric';
+  unitListener = new Subject<any>();
+  private units = [
+    {
+      system: 'metric',
+      unit: 'C',
+      checked: false
+    },
+    {
+      system: 'imperial',
+      unit: 'F',
+      checked: true
+    }
+  ];
+  private unit;
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  selectCity(API: any) {
-    const reqUrl = `${API_URL}/forecast?q=${API.location}&units=${API.units}&APPID=${API_KEY}`;
-    this.http.get(reqUrl).subscribe((data) => {
-      const weatherAPI = this.generateWeatherData(API, data);
+  selectCity(conf: any) {
+    const weatherAPI = {
+      data: {
+        metric: null,
+        imperial: null,
+      },
+      location: conf.location
+    };
+    const locationParams = `q=${conf.location}`;
+    this.getMetricUnitData(weatherAPI, locationParams);
+  }
+
+  selectLocationByCoordinates(conf: any) {
+    const weatherAPI = {
+      data: {
+        metric: null,
+        imperial: null,
+      },
+      location: conf.location
+    };
+    const locationParams = `lat=${conf.location.lat}&lon=${conf.location.lon}`;
+    this.getMetricUnitData(weatherAPI, locationParams);
+  }
+
+  private getMetricUnitData(weatherAPI: any, locationParams: string) {
+    const units = 'metric';
+    const reqUrl = `${API_URL}/forecast?${locationParams}&units=${units}&APPID=${API_KEY}`;
+    this.http.get(reqUrl).subscribe((metricData) => {
+      weatherAPI.data.metric = metricData;
+      this.getImperialUnitData(weatherAPI, locationParams);
+    }, (error) => {
+      this.apiDataListener.next({ error, valid: false });
+    });
+  }
+
+  private getImperialUnitData(weatherAPI: any, locationParams: string) {
+    const units = 'imperial';
+    const reqUrl = `${API_URL}/forecast?${locationParams}&units=${units}&APPID=${API_KEY}`;
+    this.http.get(reqUrl).subscribe((imperialData) => {
+      weatherAPI.data.imperial = imperialData;
+      this.storeLocationWeatherData(weatherAPI);
       this.apiDataListener.next({ weatherAPI, valid: true });
-      this.storeCityData(weatherAPI);
       this.router.navigate(['/info']);
     }, (error) => {
       this.apiDataListener.next({ error, valid: false });
     });
   }
 
-  selectLocationByCoordinates(API: any) {
-    const reqUrl = `${API_URL}/forecast?lat=${API.lat}&lon=${API.lon}&units=${API.units}&APPID=${API_KEY}`;
-    this.http.get(reqUrl).subscribe((data) => {
-      const weatherAPI = this.generateWeatherData(API, data);
-      this.apiDataListener.next({ weatherAPI, valid: true });
-      this.storeCityData(weatherAPI);
-      this.router.navigate(['/info']);
-    }, (error) => {
-      this.apiDataListener.next({ error, valid: false });
-    });
+  private storeLocationWeatherData(weatherAPI: any) {
+    localStorage.setItem('weatherapi', JSON.stringify(weatherAPI));
   }
 
   getApiDataListener() {
     return this.apiDataListener.asObservable();
   }
 
+  getUnitListener() {
+    return this.unitListener.asObservable();
+  }
+
   getUnit() {
+    if (!localStorage.getItem('unit')) {
+      localStorage.setItem('unit', JSON.stringify(this.units[0]));
+    }
+    this.unit = JSON.parse(localStorage.getItem('unit'));
     return this.unit;
   }
 
-  setUnit(unit: string) {
-    this.unit = unit;
+  toggleUnit() {
+    const currentUnit = this.getUnit();
+    const toggledUnit = this.units.filter(unitObj => unitObj.system !== currentUnit.system)[0];
+    localStorage.setItem('unit', JSON.stringify(toggledUnit));
+    const data = JSON.parse(localStorage.getItem('weatherapi')).data[toggledUnit.system];
+    this.unitListener.next(data);
   }
 
-  private generateWeatherData(API: any, data: any) {
-    return {
-      data: {
-        metric: (API.units === 'metric') ? data : null,
-        imperial: (API.units === 'imperial') ? data : null
-      },
-      location: (API.location) ? API.location : { lat: API.lat, lon: API.lon }
-    };
-  }
-
-  private storeCityData(weatherAPI: any) {
-    localStorage.setItem('weatherapi', JSON.stringify(weatherAPI));
-  }
 }

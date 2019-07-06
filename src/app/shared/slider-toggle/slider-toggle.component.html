@@ -1,8 +1,8 @@
 <div class="temperature-unit-toggle">
-  <input id="temp-unit-checkbox" type="checkbox">
+  <input id="temp-unit-checkbox" type="checkbox" #toggle [checked]="checked">
   <div class="slider">
-    <div class="unit"><span class="text">&#176;{{ 'C' }}</span></div>
+    <div class="unit"><span class="text">&#176;{{ unit }}</span></div>
     <div class="button"></div>
   </div>
-  <label for="temp-unit-checkbox"></label>
+  <label for="temp-unit-checkbox" (click)="onToggleUnit(toggle)"></label>
 </div>

@@ -28,7 +28,6 @@ export class CitySelectionComponent implements OnInit, OnDestroy {
           body: `${this.helper.upperCaseFirstLetter(response.error.error.message)}`
         };
       }
-      console.log(response);
       this.isLoading = false;
     });
   }
@@ -37,8 +36,7 @@ export class CitySelectionComponent implements OnInit, OnDestroy {
     const validForm = this.formValidation(form);
     if (validForm) {
       const apiConf = {
-        location: form.value.city,
-        units: 'metric'
+        location: form.value.city
       };
       this.isLoading = true;
       this.weatherService.selectCity(apiConf);
@@ -54,9 +52,10 @@ export class CitySelectionComponent implements OnInit, OnDestroy {
 
   private getCoords(position) {
     const apiConf = {
-      lat: position.coords.latitude,
-      lon: position.coords.longitude,
-      units: 'metric'
+      location: {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+      }
     };
     this.weatherService.selectLocationByCoordinates(apiConf);
   }

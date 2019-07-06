@@ -1,7 +1,7 @@
 <p class="date">{{ weatherInfo.date }}</p>
 <p class="weather-description">{{ weatherInfo.description }}</p>
 <div class="weather-info">
-  <div class="temp">{{ weatherInfo.temp }}&#176;C</div>
+  <div class="temp">{{ weatherInfo.temp }}&#176;{{ unit }}</div>
   <div class="icon">
     <i class="wi" [ngClass]="weatherInfo.icon"></i>
   </div>
@@ -10,22 +10,22 @@
       <tr>
         <td>Morning</td>
         <td>{{ weatherInfo.fullDayTemps.morning }}</td>
-        <td>&#176;C</td>
+        <td>&#176;{{ unit }}</td>
       </tr>
       <tr>
         <td>Day</td>
         <td>{{ weatherInfo.fullDayTemps.day }}</td>
-        <td>&#176;C</td>
+        <td>&#176;{{ unit }}</td>
       </tr>
       <tr>
         <td>Evening</td>
         <td>{{ weatherInfo.fullDayTemps.evening }}</td>
-        <td>&#176;C</td>
+        <td>&#176;{{ unit }}</td>
       </tr>
       <tr>
         <td>Night</td>
         <td>{{ weatherInfo.fullDayTemps.night }}</td>
-        <td>&#176;C</td>
+        <td>&#176;{{ unit }}</td>
       </tr>
     </table>
   </div>

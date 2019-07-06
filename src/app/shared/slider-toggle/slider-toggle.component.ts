@@ -1,15 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { WeatherService } from '../weather.service';
+import { Subscription } from 'rxjs';
+import { CheckboxControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-slider-toggle',
   templateUrl: './slider-toggle.component.html',
   styleUrls: ['./slider-toggle.component.scss']
 })
-export class SliderToggleComponent implements OnInit {
+export class SliderToggleComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private weatherService: WeatherService) { }
+
+  @ViewChild('toggle', { static: true }) checkbox: ElementRef;
+  unit = 'C';
+  checked = false;
+  private unitSub: Subscription;
 
   ngOnInit() {
+    this.unit = this.weatherService.getUnit().unit;
+    this.checked = this.weatherService.getUnit().checked;
+
+    this.unitSub = this.weatherService.getUnitListener().subscribe(() => {
+      this.unit = this.weatherService.getUnit().unit;
+      this.checked = !this.weatherService.getUnit().checked;
+    });
   }
 
+  onToggleUnit() {
+    this.weatherService.toggleUnit();
+  }
+
+  ngOnDestroy() {
+    this.unitSub.unsubscribe();
+  }
 }
