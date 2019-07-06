@@ -9,10 +9,40 @@
   & p {
     font-weight: 300;
     &.name {
-      font-size: .8rem;
+      font-size: calc(.8rem / 2 + .5vw);
+    }
+    &.temp {
+      font-size: calc(.8rem / 2 + .5vw);
     }
   }
   & i {
-    font-size: 2.5rem;
+    font-size: calc(3.2rem / 2.5 + 1.2vw);
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .temperature-list {
+    margin-top: 5vw;
+  }
+
+  .day {
+    & p {
+      &.name {
+        font-size: calc(.8rem / 2 + 1vw);
+      }
+      &.temp {
+        font-size: calc(.8rem / 2 + 1vw);
+      }
+    }
+    & i {
+      font-size: calc(4.5rem / 2.5 + 2vw);
+    }
+  }
+}
+
+@media only screen and (orientation: portrait) and (max-width: 600px) {
+  .temperature-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 }

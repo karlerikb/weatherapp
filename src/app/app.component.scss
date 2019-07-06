@@ -2,17 +2,18 @@
 
 .center-console {
   padding: 2.3vw;
-  width: 75vw;
-  height: 75vh;
+  width: 80vw;
   background: $white;
   box-shadow: 0 0 10px 2px $shadow-black;
-  overflow: auto;
-
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   position: absolute;
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
+}
+
+@media only screen and (orientation: portrait) {
+  .center-console {
+
+  }
 }

@@ -1,5 +1,7 @@
 <div class="container">
-  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <div class="loader">
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  </div>
   <div class="controls">
     <h1 (click)="onNavigateToCitySelection()">
       <span class="back icon">
@@ -11,6 +13,8 @@
       <app-slider-toggle></app-slider-toggle>
     </div>
   </div>
-  <app-current-weather></app-current-weather>
-  <app-temperature-list></app-temperature-list>
+  <div class="weather-data">
+    <app-current-weather></app-current-weather>
+    <app-temperature-list></app-temperature-list>
+  </div>
 </div>

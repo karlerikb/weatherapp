@@ -1,19 +1,19 @@
 @import "../../../sass/variables.scss";
 
 p {
-  margin: 1rem 0;
+  margin: 1vw 0;
   font-weight: 300;
 
   &.date {
-    font-size: 2rem;
+    font-size: calc(2.9rem / 2.5 + 1vw);
   }
   &.weather-description {
-    font-size: 1.5rem;
+    font-size: calc(2.4rem / 2.5 + .7vw);
   }
 }
 
 .weather-info {
-  margin-bottom: 3vw;
+  margin-bottom: 2vw;
   & * {
     color: $medium-red;
   }
@@ -22,25 +22,159 @@ p {
     vertical-align: middle;
   }
   & .temp {
-    font-size: 7rem;
+    font-size: calc(5rem / 2.5 + 5vw);
   }
   & .icon {
     padding: 0 4.5vw;
-    font-size: 8rem;
+    font-size: calc(6rem / 2.5 + 5vw);
   }
   & .day-temps {
-    font-size: 1.2rem;
+    font-size: calc(1.2rem / 1.6 + .5vw);
     font-weight: 300;
     width: 20%;
     & table {
       border-collapse: collapse;
       width: 100%;
+      & tr {
+        height: 2rem;
+      }
       & td:nth-child(2) {
         text-align: right;
       }
     }
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .weather-info {
+    margin-top: 5vw;
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-template-areas: "main-temp    icon     "
+                         "sub-temps    sub-temps";
+    row-gap: 2vw;
+    align-items: center;
+    justify-content: space-between;
+
+    & * {
+      margin: 0;
+      padding: 0;
+    }
+    & .temp {
+      grid-area: main-temp;
+      font-size: calc(5rem / 2.5 + 8vw);
+    }
+    & .icon {
+      padding: 0;
+      grid-area: icon;
+      text-align: right;
+      font-size: calc(6rem / 2.5 + 8vw);
+    }
+    & .day-temps {
+      grid-area: sub-temps;
+      width: 100%;
+    }
+  }
+
+  .weather-info .day-temps > table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "morning  day  evening  night";
+    justify-items: center;
     & tr {
-      height: 2rem;
+      &.morning { grid-area: morning; }
+      &.day { grid-area: day; }
+      &.evening { grid-area: evening; }
+      &.night { grid-area: night; }
+    }
+    & td {
+      padding-top: 1vw;
+      &:nth-child(1) {
+        padding-left: 1vw;
+      }
+      &:nth-child(2) {
+        padding-left: 1vw;
+      }
+      &:nth-child(3) {
+        padding-right: 1vw;
+      }
+    }
+  }
+}
+
+@media only screen and (orientation: portrait) and (max-width: 600px) {
+  .weather-info {
+    grid-template-columns: 1fr 1fr;
+    & .day-temps {
+      margin-left: 2.5vw;
+      width: 50%;
+    }
+  }
+
+  .weather-info .day-temps > table {
+    display: table;
+  }
+}
+
+@media only screen and (orientation: portrait) and (max-height: 640px) {
+  p {
+    &.date {
+      font-size: calc(2.4rem / 2.5 + .8vw);
+    }
+    &.weather-description {
+      font-size: calc(2.1rem / 2.5 + .6vw);
+    }
+  }
+
+  .weather-info {
+    & .temp {
+      font-size: calc(5rem / 2.5 + 4.5vw);
+    }
+    & .icon {
+      font-size: calc(6rem / 2.5 + 4.5vw);
+    }
+  }
+
+  .weather-info .day-temps > table {
+    & tr {
+      height: .5vw;
+    }
+  }
+}
+
+@media only screen and (orientation: landscape) and (max-height: 420px) {
+  .weather-info .day-temps > table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "morning  day" "evening  night";
+    justify-items: left;
+    column-gap: 3vw;
+    & td {
+      &:nth-child(2) {
+        padding-left: 1.5vw;
+      }
+    }
+  }
+}
+
+@media only screen and (orientation: landscape) and (max-height: 420px) and (max-width: 600px) {
+  .weather-info {
+    p {
+      &.date {
+        font-size: calc(2rem / 2.5 + .6vw);
+      }
+      &.weather-description {
+        font-size: calc(1.5rem / 2.5 + .4vw);
+      }
+    }
+    & .temp {
+      font-size: calc(4rem / 2.5 + 4.5vw);
+    }
+    & .icon {
+      font-size: calc(5rem / 2.5 + 4.5vw);
+    }
+    & .day-temps {
+      font-size: calc(1.2rem / 2 + .5vw);
     }
   }
 }

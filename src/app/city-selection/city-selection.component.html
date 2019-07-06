@@ -1,6 +1,6 @@
 <div class="container">
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  <app-message *ngIf="displayMessage" [msg]="msgObj"></app-message>
+  <app-message *ngIf="displayMessage && !isLoading" [msg]="msgObj"></app-message>
   <form (submit)="onSelectCity(form)" class="city-selection" #form="ngForm">
     <div class="input-field">
       <input
