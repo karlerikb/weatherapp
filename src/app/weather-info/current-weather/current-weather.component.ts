@@ -16,6 +16,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
   private months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December'];
 
   unitSub: Subscription;
+  apiDataSub: Subscription;
 
   constructor(private weatherService: WeatherService, private helper: HelperService) { }
 
@@ -27,6 +28,11 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     this.unitSub = this.weatherService.getUnitListener().subscribe((toggledUnitData) => {
       this.setCurrentUnit();
       this.generateCurrentWeatherInfo(toggledUnitData);
+    });
+
+    this.apiDataSub = this.weatherService.getApiDataListener().subscribe((data) => {
+      const updatedData = JSON.parse(localStorage.getItem('weatherapi')).data[this.weatherService.getUnit().system];
+      this.generateCurrentWeatherInfo(updatedData);
     });
   }
 
@@ -126,6 +132,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unitSub.unsubscribe();
+    this.apiDataSub.unsubscribe();
   }
 
 }

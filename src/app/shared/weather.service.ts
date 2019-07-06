@@ -71,7 +71,7 @@ export class WeatherService {
     this.http.get(reqUrl).subscribe((imperialData) => {
       weatherAPI.data.imperial = imperialData;
       this.storeLocationWeatherData(weatherAPI);
-      this.apiDataListener.next({ weatherAPI, valid: true });
+      this.apiDataListener.next({ valid: true });
       this.router.navigate(['/info']);
     }, (error) => {
       this.apiDataListener.next({ error, valid: false });

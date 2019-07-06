@@ -13,6 +13,7 @@ export class TemperatureListComponent implements OnInit, OnDestroy {
   unit: string;
   weatherList: any[];
   unitSub: Subscription;
+  apiDataSub: Subscription;
 
   constructor(private weatherService: WeatherService) { }
 
@@ -24,6 +25,11 @@ export class TemperatureListComponent implements OnInit, OnDestroy {
     this.unitSub = this.weatherService.getUnitListener().subscribe((toggledUnitData) => {
       this.setCurrentUnit();
       this.generateWeatherList(toggledUnitData);
+    });
+
+    this.apiDataSub = this.weatherService.getApiDataListener().subscribe((data) => {
+      const updatedData = JSON.parse(localStorage.getItem('weatherapi')).data[this.weatherService.getUnit().system];
+      this.generateWeatherList(updatedData);
     });
   }
 
@@ -81,5 +87,6 @@ export class TemperatureListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unitSub.unsubscribe();
+    this.apiDataSub.unsubscribe();
   }
 }

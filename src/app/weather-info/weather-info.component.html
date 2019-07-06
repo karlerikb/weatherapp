@@ -1,4 +1,5 @@
 <div class="container">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div class="controls">
     <h1 (click)="onNavigateToCitySelection()">
       <span class="back icon">
