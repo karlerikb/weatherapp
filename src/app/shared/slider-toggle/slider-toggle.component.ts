@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { Subscription } from 'rxjs';
-import { CheckboxControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-slider-toggle',
@@ -12,7 +11,6 @@ export class SliderToggleComponent implements OnInit, OnDestroy {
 
   constructor(private weatherService: WeatherService) { }
 
-  @ViewChild('toggle', { static: true }) checkbox: ElementRef;
   unit = 'C';
   checked = false;
   private unitSub: Subscription;
