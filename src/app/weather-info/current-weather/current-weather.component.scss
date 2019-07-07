@@ -128,10 +128,10 @@ p {
 
   .weather-info {
     & .temp {
-      font-size: calc(5rem / 2.5 + 4.5vw);
+      font-size: calc(4.5rem / 2.5 + 4.5vw);
     }
     & .icon {
-      font-size: calc(6rem / 2.5 + 4.5vw);
+      font-size: calc(5.5rem / 2.5 + 4.5vw);
     }
   }
 
@@ -141,6 +141,27 @@ p {
     }
   }
 }
+
+@media only screen and (max-width: 420px) {
+  p {
+    &.date {
+      font-size: calc(2.3rem / 2.5 + .8vw);
+    }
+    &.weather-description {
+      font-size: calc(2rem / 2.5 + .6vw);
+    }
+  }
+
+  .weather-info {
+    & .temp {
+      font-size: calc(5rem / 2.5 + 5vw);
+    }
+    & .icon {
+      font-size: calc(6rem / 2.5 + 5vw);
+    }
+  }
+}
+
 
 @media only screen and (orientation: landscape) and (max-height: 420px) {
   .weather-info .day-temps > table {
@@ -157,11 +178,12 @@ p {
   }
 }
 
-@media only screen and (orientation: landscape) and (max-height: 420px) and (max-width: 600px) {
+@media only screen and (orientation: landscape) and (max-height: 420px) and (max-width: 670px) {
   .weather-info {
     p {
       &.date {
         font-size: calc(2rem / 2.5 + .6vw);
+        background: blue !important;
       }
       &.weather-description {
         font-size: calc(1.5rem / 2.5 + .4vw);
